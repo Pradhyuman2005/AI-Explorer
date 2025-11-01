@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Explorer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" 
+    rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="Intro-content">
+        <header><h1 class="heading">AI Explorer</h1></header>
+        <main class="purpose">
+            <article>
+                <h2>Purpose of this Website</h2>
+                <p>The purpose of this website is to engage users in an interactive, story-driven exploration of 
+                    Artificial Intelligence, 
+                    blending education and play. Scroll to begin the story.</p>
+            </article>
+        </main>
+    </div>
+    <div class="play-buttons">
+        <button class="backward-button">←</button>
+        <button class="forward-button">→</button>
+    </div>
+    <sl-switch class="switch">Music</sl-switch>
+
+    <audio class="bgMusic" loop autoplay> 
+        <source src="Videos/The Flux Beneath It All - Elfl (youtube).mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="overlay"></div>
+    <!-- Robot container -->
+    <div class="robot-head">
+        <span class="text-ai">AI────</span>
+        <img class="robot-front" src="Images/robot part 1.png" alt="Robot Front Head">
+        <img class="robot-back" src="Images/robot part 2.png" alt="Robot Back Head">
+        <span class="text-ml">Machine Learning (ML)</span>
+        <img class="robot-brain-f" src="Images/brain 1.png" alt="brain front">
+        <img class="robot-brain-m" src="Images/brain 2.png" alt="brain mid">
+        <img class="robot-brain-b" src="Images/brain 3 1.png" alt="brain back">
+        <span class="super">Supervised Learning</span>
+        <span class="unsuper">Unsupervised <br> Learning</span>
+        <span class="reinforce">Reinforcement <br> Learning</span>
+        <div class="glow-ray-f"></div>
+        <div class="glow-ray-m"></div>
+        <div class="glow-ray-b"></div>
+    </div>
+
+    <div class="page-two">
+        <div class="page-menu">
+            <a class="ml-menu" href="#">What is AI</a>
+            <a class="ml-menu" href="#">History of ML</a>
+            <a class="ml-menu" href="#">AI vs ML</a>
+        </div>
+
+        <div class="what-ml">
+            <article>
+                <h2>What is Machine Learning?</h2>
+                <p>What you call AI is actually Machine Learning. Machine Learning is not the brain of AI but it
+                    is a part of it. It is a way to teach computers to learn from examples and data 
+                    instead of following exact instructions. By analyzing patterns in data, a computer can make predictions, 
+                    recognize things, or solve problems on its own, even in situations it hasn’t seen before.</p>
+            </article>
+        </div> 
+    </div>
+
+    <div id="page-three">
+        <h2 class="types-ml">Types of Machine Learning:- </h2>
+    </div>
+
+    <div id="page-four">
+        <h2 class="genai">GenAI</h2>
+        
+        <div class="what-genai">
+            <article>
+                <h2>What is Generative AI?</h2>
+                <p>GenAI is a combination of All the types of ML. What you call AI today meaning image generating, 
+                    prompt based software is actually GenAI.</p>
+            </article>
+        </div> 
+        <div class="genO"></div>
+    </div>
+
+    <div id="page-five">
+        <p class="gen-eg">Gen AI has the ability to generate things and patterns by the data it has been fed.</p>
+        <div class="io">
+            <div class="eg-g"></div>
+            <div class="wall"></div>
+            <div class="output-g"></div>
+        </div>
+        <div class="io-p">
+            <p class="input-p">If we show it the image of glasses and the image of a cat</p>
+            <nav class="nav-i">Input Layer</nav>
+            <p class="output-p">It can generate a cat wearing glasses</p>
+            <nav class="nav-o">Output Layer</nav>
+        </div>
+
+        <div class="cat-svg">
+            <svg id="eyes" width="82" height="13" viewBox="0 0 82 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.25 12.5C9.70178 12.5 12.5 9.70178 12.5 6.25C12.5 2.79822 9.70178 0 6.25 0C2.79822 0 0 2.79822 0 6.25C0 9.70178 2.79822 12.5 6.25 12.5Z" fill="black"/>
+                <path d="M75 12.5C78.4518 12.5 81.25 9.70178 81.25 6.25C81.25 2.79822 78.4518 0 75 0C71.5482 0 68.75 2.79822 68.75 6.25C68.75 9.70178 71.5482 12.5 75 12.5Z" fill="black"/>
+            </svg>
+
+            <svg id="cat" width="185" height="169" viewBox="0 0 185 169" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M26.0002 2.93578C26.0002 -0.500114 27.6092 -0.986924 29.5805 1.82918L69.7502 59.2145H26.0002V2.93578Z" fill="white"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M157.25 2.93578C157.25 -0.500114 155.641 -0.986924 153.67 1.82918L113.5 59.2145H157.25V2.93578Z" fill="white"/>
+                <path d="M91.6252 168.59C139.95 168.59 179.125 137.11 179.125 98.2773C179.125 59.4448 139.95 27.9648 91.6252 27.9648C43.3003 27.9648 4.12524 59.4448 4.12524 98.2773C4.12524 137.11 43.3003 168.59 91.6252 168.59Z" fill="white"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M91.5213 131.82C89.8871 134.868 87.24 134.873 85.6033 131.82L79.7952 120.985C78.1609 117.936 79.6185 115.465 83.0594 115.465H94.0652C97.5022 115.465 98.9661 117.932 97.3294 120.985L91.5213 131.82Z" fill="black"/>
+                <path d="M57.2502 75.8398C63.6015 75.8398 68.7502 80.9886 68.7502 87.3398C68.7502 93.6911 63.6015 98.8398 57.2502 98.8398C50.899 98.8398 45.7502 93.6911 45.7502 87.3398C45.7502 80.9886 50.899 75.8398 57.2502 75.8398Z" fill="white" stroke="black" stroke-width="2"/>
+                <path d="M126 75.8398C132.352 75.8398 137.5 80.9886 137.5 87.3398C137.5 93.6911 132.352 98.8398 126 98.8398C119.649 98.8398 114.5 93.6911 114.5 87.3398C114.5 80.9886 119.649 75.8398 126 75.8398Z" fill="white" stroke="black" stroke-width="2"/>
+                <path d="M87.9236 134.215C87.9236 134.215 77.9115 143.278 67.8994 143.278C57.8873 143.278 47.8752 134.215 47.8752 134.215M128.549 134.215C128.549 134.215 118.537 143.278 108.524 143.278C98.5123 143.278 88.5002 134.215 88.5002 134.215" stroke="black" stroke-width="5" stroke-linecap="round"/>
+                <path d="M1.00024 106.09L60.63 121.301M2.56274 95.1523L60.63 118.176M126 116.31L183.813 101.402M126 119.435L183.813 110.777" stroke="black" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+
+        <img class="glasses" src="Images/glasses.png" alt="glasses">
+        <sl-button size="large" pill class="shoe-button">Check Result</sl-button>
+
+        <div class="black-below"></div>
+        <div class="carousel-container">
+            <sl-carousel class="carousel-thumbnails" navigation loop>
+                <sl-carousel-item>
+                    <img
+                    alt="Cat wearing glasses (Generated by AI)"
+                    src="Images/cat-glasses-1.png"
+                    />
+                </sl-carousel-item>
+                <sl-carousel-item>
+                    <img
+                    alt="Different cat wearing glasses (Generated by AI)"
+                    src="Images/cat-glasses-2.png"
+                    />
+                </sl-carousel-item>
+                <sl-carousel-item>
+                    <img
+                    alt="White cat wearing glasses (Generated by AI)"
+                    src="Images/cat-glasses-3.png"
+                    />
+                </sl-carousel-item>
+                <sl-carousel-item>
+                    <img
+                    alt="Orange cat wearing differet glasses (Generated by AI)"
+                    src="Images/cat-glasses-4.png"
+                    />
+                </sl-carousel-item>
+                <sl-carousel-item>
+                    <img
+                    alt="Black cat wearing different white glasses (Generated by AI)"
+                    src="Images/cat-glasses-5.png"
+                    />
+                </sl-carousel-item>
+            </sl-carousel>
+
+            <div class="thumbnails">
+                <div class="thumbnails__scroller">
+                    <img alt="cat 1 thumbnail" class="thumbnails__image active" src="/Images/cat-glasses-1.png" />
+                    <img alt="cat 2 thumbnail" class="thumbnails__image" src="Images/cat-glasses-2.png" />
+                    <img alt="cat 3 thumbnail" class="thumbnails__image" src="Images/cat-glasses-3.png" />
+                    <img alt="cat 4 thumbnail" class="thumbnails__image" src="Images/cat-glasses-4.png" />
+                    <img alt="cat 5 thumbnail" class="thumbnails__image" src="Images/cat-glasses-5.png" />
+                </div>
+            </div>
+        </div>
+
+        <video class="video-background" preload="auto" loop autoplay muted playsinline style="visibility: 
+        visible; width: 1920px; height: 1080px;">
+            <source src="/Videos/Background loop.mp4" type="video/mp4">
+        </video>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"></script>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/button/button.js"></script>
+        <script src="main.js"></script>
+    </body>
+    </html>

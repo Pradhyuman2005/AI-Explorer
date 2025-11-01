@@ -1,0 +1,893 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Roboto Condensed", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    color: #ffffff;
+}
+
+.heading {
+    font-size: 160px;
+    margin-left: 10px;
+    margin-top: 0px;
+    margin-bottom: 3%;
+    font-weight: 900;
+    transform: translateX(-200px); /* starts from left */
+    opacity: 0;
+}
+
+.switch {
+    position: fixed;
+    right: 7%;
+    top: 78%;
+    z-index: 50;
+}
+
+sl-switch::part(base) {
+    background-color: rgba(255,255,255, 0.03);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    padding: 1.5em;
+    border-radius: 1.3em;
+}
+
+sl-switch::part(thumb) {
+    background-color: white;
+}
+
+.Intro-content {    
+    padding-left: 3%;
+}
+
+article {
+    font-size: 25px;
+    margin-left: 20px;
+}
+
+article h2 {
+    opacity: 78%;
+}
+
+.purpose {
+    background-color: rgba(255,255,255, 0.03);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    margin-right: 800px;
+    border-radius: 25px;
+    padding-bottom: 20px;
+    padding-top: 1px;
+    transform: translateY(100px); /* starts above screen */
+    opacity: 0;
+}
+
+.what-ml {
+    background-color: rgba(255,255,255, 0.03);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 25px;
+    padding: 20px;   
+    margin-left: auto;
+    margin-right: 5%;
+    width: 30%;
+}
+
+.what-genai {
+    position: absolute;
+    background-color: rgba(255,255,255, 0.03);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 25px;
+    padding: 20px;
+    top: 410%;
+    margin-left: 20px;
+    width: 30%;
+}
+
+.page-two {
+    display: flex;
+    margin-left: 20px;
+    margin-top: 10%;
+}
+
+.page-menu {
+    margin-top: 7%;
+    margin-left: 2%;
+    z-index: 20;
+}
+
+.ml-menu {
+    text-decoration: none;
+    margin-bottom: 30px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    font-size: 70px;
+    z-index: 20;
+    transition: transform .3s ease-in-out;
+}
+
+.ml-menu:hover {
+    transform: translateY(-20px);
+}
+
+.overlay {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #2f2f2f, #000000);
+    mix-blend-mode: soft-light;
+    opacity: 97%;
+    z-index: 15;
+}
+
+.play-buttons {
+    margin-left: 2.8%
+}
+
+.forward-button, .backward-button{
+    position: fixed;
+    background-color: rgba(255,255,255, 0.03);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    opacity: 80%;
+    padding: 10;
+    margin-top: 30px;
+    font-size: 70px;
+    font-weight: 900;
+    color: #ffffff;
+    z-index: 56;
+}
+
+.forward-button {
+    margin-left: 7%;
+}
+
+.video-background {
+    z-index: -999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+/* Robot container */
+.robot-head {
+    z-index: 14;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    transform: translateX(200px);
+    opacity: 0;
+}
+
+.robot-front,.robot-back {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+}
+
+.robot-front {
+    z-index: -12;
+    width: 30%;
+    height: auto;
+}
+
+.robot-back {
+    z-index: -13; /*This gives a feel that the robot back is behind the robot front*/
+    width: 11.5%;
+    top: 47%;
+    height: auto;
+}
+
+.robot-brain-f, .robot-brain-m, .robot-brain-b{
+    pointer-events: auto;
+    opacity: 0;
+    mix-blend-mode: luminosity;
+    filter:brightness(1.2);
+    position: absolute;
+}
+
+.robot-brain-f {
+    z-index: -15;
+    width: 30%;
+    right: 9%;
+    top: 12%;
+    cursor: pointer;
+}
+
+.robot-brain-m {
+    z-index: -16;
+    width: 30%;
+    right: 9%;
+    top: 12%;
+    cursor: pointer;
+}
+
+.robot-brain-b {
+    z-index: -17;
+    width: 14%;
+    right: 11%;
+    top: 12%;
+    cursor: pointer;
+}
+
+.text-ai {
+    position: absolute;
+    z-index: -16;
+    font-size: 25px;
+    font-weight: 700;
+    text-shadow: /*this text-shadow was suggested to me by AI when I asked it how to make the text glow*/
+        0 0 10px rgb(255, 255, 255), 
+        0 0 20px rgb(255, 255, 255), 
+        0 0 30px rgb(255, 255, 255); 
+    right: 39%;
+    top: 29%;
+}
+
+.text-ml {
+    opacity: 0;
+    position: absolute;
+    z-index: -14;
+    font-size: 25px;
+    font-weight: 700;
+    text-shadow: 
+        0 0 10px rgb(255, 255, 255), 
+        0 0 20px rgb(255, 255, 255), 
+        0 0 30px rgb(255, 255, 255); 
+    right: 17%;
+    top: 29%;
+}
+
+.types-ml {
+    font-size: 64px;
+    margin-right: 60%;
+    margin-left:25px;
+    margin-top: 21%;
+}
+
+.super, .unsuper, .reinforce {
+    opacity: 0;
+    position: absolute;
+    font-size: 30px;
+    text-shadow: 
+        0 0 10px rgb(255, 255, 255),
+        0 0 20px rgb(255, 255, 255);
+    z-index: 1; 
+}
+
+.super {
+    cursor: pointer;
+    top: 38%;
+    right: 25%;
+    padding: 30px;
+    transition: transform .4s ease-in-out;
+}
+.super:hover {
+    transform: translateY(-15px);
+}
+
+.unsuper {
+    top: 27%;
+    right: 11.3%;
+    padding: 30px;
+    cursor: pointer;
+    transition: transform .4s ease-in-out;
+}
+.unsuper:hover {
+    transform: translateY(-15px);
+}
+
+.reinforce {
+    top: 20%;
+    right: -1%;
+    cursor: pointer;
+    padding: 30px;
+    transition: transform .4s ease-in-out;
+}
+.reinforce:hover {
+    transform: translateY(-15px);
+}
+
+.glow-ray-f, .glow-ray-m, .glow-ray-b {
+    position: absolute;
+    top: 21%;
+    right: 21%;
+    width: 5px; /*Thin width*/
+    background: white;
+    filter: brightness(10);/* makes it glow */
+    z-index: -18; /* behind brain but above background */
+}
+
+.glow-ray-f {
+    transform: rotate(30deg);
+    right: 14.5%;
+    top: 40%;
+    height: 0; /* initial height */
+}
+
+.glow-ray-m {
+    height: 0; /* initial height */
+}
+
+.glow-ray-b {
+    transform: rotate(-30deg);
+    right: 27.4%;
+    top: 40%;
+    height: 0; /* initial height */
+}
+
+.genai {
+    cursor: pointer;
+    font-size: 50px;
+    position: absolute;
+    padding: 30px;
+    top: 406%;
+    right: 41.5%;
+    z-index: 1;
+    transition: transform .3s ease-in-out;
+}
+
+.genai:hover {
+    transform: scale(1.3) translateY(-14px); 
+}
+
+.genO {
+    position: absolute;
+    background-color: rgba(255,255,255, 0.03);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: rgb(255, 255, 255) solid 2px;
+    opacity: 90%;
+    height: 400px;
+    width: 400px;
+    border-radius: 200px;
+    top: 391.6%;
+    right: 34.5%;
+    z-index: -11;
+}
+
+.gen-eg {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 110%;
+}
+
+.eg-g {
+    background-color: rgba(255,255,255, 0.03);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: gray solid 2px;
+    opacity: 90%;
+    height: 400px;
+    width: 400px;
+    border-radius: 200px;
+    z-index: -11;
+    margin-top: 1%;
+    margin-left: 14%;
+    margin-right: 10%
+}
+
+.io {
+    display: flex;
+}
+
+.output-g {
+    background-color: rgba(255,255,255, 0.03);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: gray solid 2px;
+    opacity: 90%;
+    height: 400px;
+    width: 400px;
+    border-radius: 200px;
+    z-index: -11;
+    margin-top: 1%;
+    margin-left: 10%;
+}
+
+.wall {
+    width: 3px;
+    height: 400px;
+    background-color: white;
+    z-index: -7;
+}
+
+.io-p {
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 10%;
+}
+
+.input-p {
+    margin-right: 15%;
+}
+
+.output-p {
+    margin-right: 4%;
+}
+
+.nav-i, .nav-o {
+    position: absolute;
+    font-size: 59px;
+    top: 520%;
+}
+
+.nav-i {
+    margin-right: 45%;
+}
+
+.nav-o {
+    margin-left: 48%;
+}
+
+.cat-svg {
+    position: absolute;
+    top: 496.5%;
+    right: 72.5%;
+}
+
+#eyes {
+    position: absolute;
+    top: 49%;
+    right: 25.5%;
+    animation: eyes 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes eyes{
+    from{
+        transform: translateX(0px);
+    }
+
+    to{
+        transform: translateX(-9px);
+    }
+}
+
+.glasses {
+    position: absolute;
+    width: 143px;
+    height: auto;
+    top: 502.5%;
+    right: 61%;
+}
+
+.shoe-button {
+    position: absolute;
+    padding: 25px;
+    top: 502%;
+    right: 20%;
+    z-index: 1;
+}
+
+/* Carousel Thumbnails Styles */
+
+.carousel-thumbnails {
+    --slide-aspect-ratio: 3 / 2;
+}
+
+.thumbnails {
+    display: flex;
+    justify-content: center;
+}
+
+.thumbnails__scroller {
+    display: flex;
+    gap: var(--sl-spacing-small);
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    scroll-padding: var(--sl-spacing-small);
+}
+
+.thumbnails__scroller::-webkit-scrollbar {
+    display: none;
+}
+
+.thumbnails__image {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+
+    opacity: 0.3;
+    will-change: opacity;
+    transition: 250ms opacity;
+
+    cursor: pointer;
+}
+
+.thumbnails__image.active {
+    opacity: 1;
+    border: white solid 5px; /* to make it easy for user to see which image is selected */
+}
+
+.carousel-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 40; /* To ensure it is above other elements */
+    width: 76%;
+    overflow: auto; /*to make sure the user can scroll if content overflows*/
+    animation: fadeIn 0.7s ease-in-out; /* Fade-in animation for smooth transition*/
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; transform: translate(-50%, -45%);
+    }
+    to { 
+        opacity: 1; transform: translate(-50%, -50%);
+    }
+}
+
+.black-below {
+    display: none;
+    position: fixed;
+    scale: 5;
+    top: 100%;
+    left: 100%;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 39; /*to ensure its just below the carousel*/
+}
+
+/*For Tablet 768 x 506 */
+@media (max-width: 768px) {
+
+
+    .robot-head {
+        width: 110%;
+        right: 40%;
+    }
+
+    .heading {
+        font-size: 110px;
+        margin-left: 5px;
+    }
+
+    article {
+        font-size: 18px;
+        margin-left: 10px;
+    }
+
+    .purpose {
+        margin-right: 45%;
+        padding: 5px;
+        border-radius: 15px;
+    }
+
+    .text-ai {
+        font-size: 18px;
+        right: 35%;
+        top: 25%;
+    }
+
+    .robot-brain-f, .robot-brain-m {
+        width: 38%;
+        top: 10%;
+        right: 5%;
+    }
+
+    .robot-brain-b {
+        width: 18%;
+        top: 10%;
+        right: 7%;
+    }
+
+    .page-menu {
+        margin-top: 12%;
+        margin-left: 70%;
+        z-index: 20;
+    }
+
+    .types-ml {
+        font-size: 36px;
+        margin-left: 74%;
+        margin-top: 34%;
+    }
+
+    .what-ml, .what-genai {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 15px;
+        font-size: 16px;
+    }
+
+    .super, .unsuper, .reinforce {
+        font-size: 18px;
+    }
+
+    .super {
+        top: 32%;
+        right: 25%;
+    }
+
+    .unsuper {
+        top: 22%;
+        right: 5%;
+    }
+
+    .reinforce {
+        top: 14%;
+        right: -12%;
+    }
+
+    .page-two {
+        flex-direction: column;
+        margin-left: 5px;
+        margin-top: 20%;
+    }
+
+    .ml-menu {
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+
+    .text-ml {
+        font-size: 24px;
+        right: 10%;
+        top: 26%;
+    }
+
+    .glow-ray-m {
+        height: auto;
+        top: 30%;
+        width: 3px;
+    }
+
+    .glow-ray-f, .glow-ray-b {
+        display: none;
+    }
+
+    .genai {
+        font-size: 30px;
+        padding: 15px;
+        top: 557%;
+        right: 58.7%;
+    }
+
+    .genO {
+        top: 543.5%;
+        right: 49.5%;
+    }
+
+    .what-genai {
+        top: 551%;
+        margin-left: 55%;
+        margin-right: 35%;
+    }
+
+    .gen-eg {
+        margin-top: 215%;
+        text-align: left;
+        margin-left: 52%;
+    }
+
+    .genO, .eg-g, .output-g {
+        width: 250px;
+        height: 250px;
+        border-radius: 125px;
+    }
+
+    .io-p {
+        font-size: 18px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .io {
+        margin-bottom: -20%;
+    }
+
+    .nav-i, .nav-o {
+        font-size: 25px;
+        top: 683.4%;
+    }
+
+    .nav-i {
+        right: 17%;
+    }
+
+    .nav-o {
+        right: 9%;
+    }
+
+    .cat-svg {
+        width: 150px;
+        height: auto;
+        top: 653%;
+        right: 68.5%;
+        scale: 0.63;
+    }
+
+    #eyes {
+        scale: 1.3;
+        right: -54%;
+        margin-right: 60%;
+    }
+
+    @keyframes eyes{
+        from{
+            transform: translateX(0px);
+        }
+
+        to{
+            transform: translateX(-6px);
+        }
+    }
+
+    .glasses {
+        width: 100px;
+        top: 665%;
+        right: 55%;
+    }
+
+    .shoe-button {
+        top: 662%;
+        right: 6.6%;
+        padding: 15px;
+        font-size: 16px;
+    }
+
+    .carousel-container {
+        width: 95%;
+        max-height: 130vh; 
+    }
+
+    .thumbnails__image {
+        width: 30px;
+        height: 30px;
+    }
+
+    .input-p {
+        text-align: left;
+        margin-right: 55%;
+        margin-left: 14%;
+        margin-top: 0px;
+    }
+
+    .output-p {
+        text-align: left;
+        margin-left: 70%;
+        margin-right: 0px;
+        margin-top: -9%;
+        margin-bottom: 19%;
+    }
+
+    .forward-button, .backward-button {
+        font-size: 40px;
+        padding: 5px;
+        margin-top: 15%;
+    }
+
+    .switch {
+        top: 65%;
+        right: 5%;
+        z-index: 5;
+    }
+}
+
+/* For Mobile 375x541 */
+@media (max-width: 400px) {
+
+  .heading {
+    font-size: 70px;
+    margin-left: 5px;
+  }
+
+  article {
+    font-size: 18px;
+    margin-left: 10px;
+  }
+
+  .purpose, .what-ml, .what-genai {
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 15px;
+  }
+
+  .forward-button, .backward-button {
+    font-size: 40px;
+    padding: 5px;
+  }
+
+  .robot-front, .robot-back {
+    width: 40%; /* scale down robot parts */
+    right: 5%;
+  }
+
+  .robot-back {
+    width: 20%;
+  }
+
+  .robot-brain-f, .robot-brain-m, .robot-brain-b {
+    width: 50%;
+    right: 5%;
+    top: 10%;
+  }
+
+  .super, .unsuper, .reinforce {
+    font-size: 20px;
+    top: auto;
+    bottom: 10%; /* move down if needed */
+  }
+
+  /* Glow rays shorter for mobile */
+  .glow-ray-f { height: 150px; top: 30%; width: 3px; }
+  .glow-ray-m { height: 400px; top: 30%; width: 3px; }
+  .glow-ray-b { height: 150px; top: 30%; width: 3px; }
+
+  .genai {
+    font-size: 25px;
+    top: auto;
+    bottom: 10%;
+    right: 5%;
+  }
+
+  .genO, .eg-g, .output-g {
+    width: 250px;
+    height: 250px;
+    top: auto;
+    bottom: 15%;
+    right: 10%;
+  }
+
+  .cat-svg {
+    width: 120px;
+    height: auto;
+    top: auto;
+    bottom: 10%;
+    right: 20%;
+  }
+
+  .glasses {
+    width: 80px;
+    top: auto;
+    bottom: 8%;
+    right: 25%;
+  }
+
+  .shoe-button {
+    padding: 15px;
+    top: auto;
+    bottom: 5%;
+    right: 15%;
+  }
+
+  /* Prevent horizontal scroll */
+  html, body {
+    overflow-x: hidden;
+  }
+}
