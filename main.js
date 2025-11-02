@@ -80,40 +80,9 @@ musicSwitch.addEventListener('sl-change', (e) => { // This is saying to JS that 
     }
 });
 
-{
-    const carousel = document.querySelector('.carousel-thumbnails'); // setting carousel as constant 
-    const scroller = document.querySelector('.thumbnails__scroller'); // setting scroller as constant
-    const thumbnails = document.querySelectorAll('.thumbnails__image'); // setting thumbnails as constant
-    // I'm setting these to constants and not variables is because we're not gonna be needing to change them later at all
-
-    scroller.addEventListener('click', e => { // Adding event listener to click. scroller is an element that holds thumbnail images
-      const target = e.target; // this is to set a target of 'click' about where it must happen to trigger the following function
-
-      if (target.matches('.thumbnails__image')) { // Its an if function. It checks whether the click is on .thumbnail-images element in css or not. If yes then run the code
-        const index = [...thumbnails].indexOf(target); // The thumbnails are set as arrays, index of (target) gives a numerical value to the target slide
-        carousel.goToSlide(index); // goToSlide tells to jump on the next image as per the index
-      }
-    });
-
-    carousel.addEventListener('sl-slide-change', e => { // the e here happens when the slide is changed
-      const slideIndex = e.detail.index; // gives the number (index) of the current active slide
-
-      [...thumbnails].forEach((thumb, i) => { // [...thumbnails] converts thumbnails into loops so we can swipe around easily
-        thumb.classList.toggle('active', i === slideIndex); // adds or removes a CSS class. active addes class only to the active slide this is to highlight the current image
-        if (i === slideIndex) { // This checks whether this is the thumbnail that matches the active slide or not. === checks value and type both to be 100% sure
-          thumb.scrollIntoView({ // If yes, this scrolls the thumbnail container
-            block: 'nearest' // This makes sures to scroll only the amount that is needed to show it
-          });
-        }
-      });
-    });
-  }
-
-// Below code is mine:-
-
-let shoeButton = document.querySelector('.shoe-button'); //setting as variables, could have set as constant as well but never mind
-let blackBelow = document.querySelector('.black-below'); //setting as variables, could have set as constant as well but never mind
-let carouselContainer = document.querySelector('.carousel-container'); //setting as variables, could have set as constant as well but never mind
+const shoeButton = document.querySelector('.shoe-button'); //setting as constant
+const blackBelow = document.querySelector('.black-below'); //setting as constant
+const carouselContainer = document.querySelector('.carousel-container'); //setting as constant
 
 shoeButton.addEventListener('click', () => { // Once the click event happens on the shoeButton
   blackBelow.style.display = 'flex'; // the black below screen becomes visible by display flex
@@ -123,9 +92,9 @@ shoeButton.addEventListener('click', () => { // Once the click event happens on 
 blackBelow.addEventListener('click', () => { // Once the user clicks on the blackBellow
   blackBelow.style.display = 'none'; // The black below disappears
   carouselContainer.style.display = 'none'; // Image carousel disappears
-})
+});
 
-// Array for each page
+// The rest of your page scroll/navigation code remains the same
 const pages = [
   document.querySelector('.Intro-content'),
   document.querySelector('.page-two'),
@@ -134,11 +103,8 @@ const pages = [
   document.querySelector('#page-five')
 ]; // this sets all the content pages into arrays which we can easily loop around
 
-// A variable to store the current array index
 let currentIndex = 0; //sets the 1st page index value as 0
 
-// Function to scroll smoothly to a page and update the index
-/* I took help of AI to write this step*/
 function scrollToPage(index) { // Sets a condition for function for scrolltopage
   if (index >= 0 && index < pages.length) { // If function. this basically sets some conditions before any action begins. index >=0 means to sure the number isn’t negative. index < pages.length ensures it is less than the total number of pages
     pages[index].scrollIntoView({ behavior: 'smooth' }); // If the above conditions are met, only then run this code. scrollIntoView brings scroll element into view. behaviour-smooth ensures realistic scroll behaviour
@@ -147,7 +113,6 @@ function scrollToPage(index) { // Sets a condition for function for scrolltopage
   }
 }
 
-// For disabling buttons on first/last page
 function updateButtonState() { // Making backward forward buttons functionable
   const backButton = document.querySelector('.backward-button'); // Setting it as const
   const forwardButton = document.querySelector('.forward-button'); // Setting it as const
@@ -156,7 +121,6 @@ function updateButtonState() { // Making backward forward buttons functionable
   forwardButton.disabled = currentIndex === pages.length - 1; //Same here
 }
 
-//Event listeners for navigation buttons
 document.querySelector('.forward-button').addEventListener('click', () => { // Adding events to navigation button forward
   if (currentIndex < pages.length - 1) { // If function here. it says that run the code only when this condition is met- Check if you’re not on the last page yet.
     scrollToPage(currentIndex + 1); // Moves to the next page smoothly.
@@ -169,7 +133,6 @@ document.querySelector('.backward-button').addEventListener('click', () => { // 
   }
 });
 
-// 6. Detect which page is in view and update index
 window.addEventListener('scroll', () => { // An event listener for scroll
   pages.forEach((page, index) => { // goes through each page in pages array
     const rect = page.getBoundingClientRect(); // Realise the page’s position on the screen
@@ -180,5 +143,4 @@ window.addEventListener('scroll', () => { // An event listener for scroll
   });
 });
 
-// 7. Run the functions initially
 updateButtonState(); // Runs once at the start to make sure the buttons are correctly set when the page first loads.
