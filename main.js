@@ -1,6 +1,7 @@
 gsap.registerPlugin(ScrollTrigger) //Gsap scroll trigger plugin
 
 document.addEventListener("DOMContentLoaded", () => { // Ensure DOM is loaded before running animations
+  document.body.classList.remove('loading');
   const tl = gsap.timeline(); // Create a timeline for landing page animations
 
   // Robot head enters from right
@@ -29,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => { // Ensure DOM is loaded be
 
 let tl = gsap.timeline({ 
   scrollTrigger: { // ScrollTrigger
-    trigger: ".video-background", // what element triggers the animation, body is perfect here because it covers the whole page
+    trigger: "body", // what element triggers the animation, body is perfect here because it covers the whole page
     start: "top top", // animation starts from the top of the page by top of the element
     end: "+=1600", // user scrolls more than or equal to 1600px to finish animation 
     scrub: 2, // animation follows scroll movement. scrub ensures complete control of animation with scrolling and 2 makes delay for smoothness

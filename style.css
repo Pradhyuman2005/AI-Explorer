@@ -17,6 +17,10 @@ body {
     color: #ffffff;
 }
 
+body.loading .robot-head, body.loading .heading, body.loading .purpose {
+    visibility: hidden;
+}
+
 .heading {
     font-size: 160px;
     margin-left: 10px;
