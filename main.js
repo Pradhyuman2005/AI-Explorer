@@ -2,16 +2,7 @@ gsap.registerPlugin(ScrollTrigger) //Gsap scroll trigger plugin
 
 document.addEventListener("DOMContentLoaded", () => { // Ensure DOM is loaded before running animations
   document.body.classList.remove('loading');
-
-let tl = gsap.timeline({ 
-  scrollTrigger: { // ScrollTrigger
-    trigger: "body", // what element triggers the animation, body is perfect here because it covers the whole page
-    start: "top top", // animation starts from the top of the page by top of the element
-    end: "+=1600", // user scrolls more than or equal to 1600px to finish animation 
-    scrub: 2, // animation follows scroll movement. scrub ensures complete control of animation with scrolling and 2 makes delay for smoothness
-    pin: ".robot-head", // pin the robot head container so the animation is fixed on the main subject (which is robot head)
-  }
-});
+  const tl = gsap.timeline(); // Create a timeline for landing page animations
 
   // Robot head enters from right
   tl.to(".robot-head", { // Target robot head element
@@ -35,6 +26,16 @@ let tl = gsap.timeline({
     duration: 1, // Animation duration
     ease: "power3.out" // Easing function for smooth effect
   }, "<0.3"); // "<0.3" so that it starts 0.3s after heading starts
+});
+
+let tl = gsap.timeline({ 
+  scrollTrigger: { // ScrollTrigger
+    trigger: "body", // what element triggers the animation, body is perfect here because it covers the whole page
+    start: "top top", // animation starts from the top of the page by top of the element
+    end: "+=1600", // user scrolls more than or equal to 1600px to finish animation 
+    scrub: 2, // animation follows scroll movement. scrub ensures complete control of animation with scrolling and 2 makes delay for smoothness
+    pin: ".robot-head", // pin the robot head container so the animation is fixed on the main subject (which is robot head)
+  }
 });
 
 // Robot and text animations
