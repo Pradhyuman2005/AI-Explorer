@@ -1,147 +1,299 @@
 gsap.registerPlugin(ScrollTrigger) //Gsap scroll trigger plugin
 
-document.addEventListener("DOMContentLoaded", () => { // Ensure DOM is loaded before running animations
-  document.body.classList.remove('loading');
-  const tl = gsap.timeline(); // Create a timeline for landing page animations
+const vw = window.innerWidth;
 
-  // Robot head enters from right
-  tl.to(".robot-head", { // Target robot head element
-    x: 0, // Move to original position
-    opacity: 1, // opacity 0 was originally done in css to make it visually more smooth
-    duration: 1.5, // Animation duration
-    ease: "power3.out" // Easing function for smooth effect
-  });
+const moveFront = -vw * 0.71;
+const moveBack = vw * 0.52;
+const moveHead = -vw * 0.27;
+const moveTextAI = -vw * 0.71;
 
-  // Heading slides from left right after the robot head
-  tl.to(".heading", { // Target heading element
-    x: 0, // Move to original position
-    opacity: 1, // opacity 0 was originally done in css to make it visually more smooth
-    duration: 1.2, // Animation duration
-    ease: "power3.out" // Easing function for smooth effect
-  }, "<0.3"); // "<0.3" so that it starts 0.3s after robot head starts
+function disableScroll() {
 
-  tl.to(".purpose", { // Target purpose element
-    y:0, // Move to original position
-    opacity: 1, // opacity 0 was originally done in css to make it visually more smooth
-    duration: 1, // Animation duration
-    ease: "power3.out" // Easing function for smooth effect
-  }, "<0.3"); // "<0.3" so that it starts 0.3s after heading starts
-});
+    document.body.style.overflow = "hidden";
 
-let tl = gsap.timeline({ 
-  scrollTrigger: { // ScrollTrigger
-    trigger: "body", // what element triggers the animation, body is perfect here because it covers the whole page
-    start: "top top", // animation starts from the top of the page by top of the element
-    end: "+=1600", // user scrolls more than or equal to 1600px to finish animation 
-    scrub: 2, // animation follows scroll movement. scrub ensures complete control of animation with scrolling and 2 makes delay for smoothness
-    pin: ".robot-head", // pin the robot head container so the animation is fixed on the main subject (which is robot head)
-  }
-});
+    window.addEventListener("wheel", preventScroll, { passive: false });
+    window.addEventListener("touchmove", preventScroll, { passive: false });
+    window.addEventListener("keydown", preventKeys);
 
-// Robot and text animations
-tl.to(".robot-front", { x: -1360, y:45, duration: 2 }); // Move robot front left and slightly down
-tl.to(".robot-back", { x: 780, y:-180, duration: 2 }, "<"); //this < makes it start at the same time as previous animation with no time delay
-tl.to(".robot-head", { x: -400, duration: 1 }, "<"); // Robot head moves down at the same time
-tl.to(".text-ai", {x: -1360, y:145, duration: 1}, "<"); // AI symbol goes away with the robot-front
-tl.to(".text-ml", { opacity:1, duration: 1.2}, "<") // ML text appears on the robot brain smoothly
+}
 
-// Brain flicker animations
-tl.to(".robot-brain-f", { opacity: 1, duration: 0.1 }, "<0.2"); // Flicker effect for brain front
-tl.to(".robot-brain-m", { opacity: 1, duration: 0.1 }, "<0.1"); // Flicker effect for brain middle but with slight delay
-tl.to(".robot-brain-b", { opacity: 1, duration: 0.1 }, "<0.1"); // Flicker effect for brain back but with slight delay
-tl.to(".text-ml", { opacity: 1, duration: 0.3 }, "<"); // ML text on the brain doesn't flicker and maintains its opacity
+function enableScroll() {
 
-tl.to(".robot-brain-f", { x:-50, y: 20, duration: 1 }); // Move brain front a little ahead
-tl.to(".robot-brain-m", { y: -20, duration: 1 }, "<"); // Move brain middle a little up at the same time
-tl.to(".robot-brain-b", { x: 80, y: -30, duration: 1 }, "<"); // Move brain back a little right and up at the same time
-tl.to(".text-ml", { opacity:1, duration:1}, "<"); // Keep ML text visible
-tl.to(".text-ml", { opacity:0, duration:1}, "<"); // ML text fades out only now, it was important to keep the opacity 1 during brain movement because otherwise there was some weird opacity drop was persistent in the previous time when brain was just exposed. I think people who've used After Effects would know this 
-tl.to(".super", { opacity:1, duration:1}, "<"); // Supervised text appears the moment brain front reaches its position however the opacity 1 ensures smoothness 
-tl.to(".unsuper", { opacity:1, duration:1}, "<"); // Unsupervised text appears the moment brain middle reaches its position however the opacity 1 ensures smoothness
-tl.to(".reinforce", { opacity:1, duration:1}, "<"); // Reinforcement text appears the moment brain back reaches its position however the opacity 1 ensures smoothness
+    document.body.style.overflow = "";
 
-// Glow rays animation
-tl.to(".glow-ray-f",{height: 390, duration:0.8}); // Glow ray front expands
-tl.to(".glow-ray-m",{height: 1000, duration:0.8}, "<"); // Glow ray middle expands at the same time
-tl.to(".glow-ray-b",{height: 390, duration:0.8} , "<"); // Glow ray back expands at the same time
+    window.removeEventListener("wheel", preventScroll);
+    window.removeEventListener("touchmove", preventScroll);
+    window.removeEventListener("keydown", preventKeys);
 
-const musicSwitch = document.querySelector('.switch'); // Music toggle switch
-const bgMusic = document.querySelector('.bgMusic'); // Background music audio element to trigger the audio
+}
 
-// The below code is generated by claude AI:-
+function preventScroll(e) {
+    e.preventDefault();
+}
 
-// Note: Most browsers block autoplay until user interact so I had to make the default switch as OFF rather than ON
+function preventKeys(e) {
 
-// Listen for switch changes
-musicSwitch.addEventListener('sl-change', (e) => { // This is saying to JS that when an event happens on sl-switch (sl-change) then only run this code. e is an event object that represents what happened 
-    if (e.target.checked) { // if-else function where if the the e(event object) is checked then 
-        bgMusic.play(); // play the bgMusic 
-    } else { // if unchecked
-        bgMusic.pause(); // pause immediately
+    const keys = [
+        "ArrowUp",
+        "ArrowDown",
+        "ArrowLeft",
+        "ArrowRight",
+        "PageUp",
+        "PageDown",
+        "Home",
+        "End",
+        " ",
+    ];
+
+    if (keys.includes(e.key)) {
+        e.preventDefault();
+    }
+}
+
+gsap.from(".robot-head", {
+    x: 200,
+    opacity: 0,
+    duration: 1.5,
+    ease: "power2.out",
+    clearProps: "transform",
+
+    onComplete: () => {
+        enableScroll();
+
+        ScrollTrigger.refresh();
+
+        createRobotTimeline();
     }
 });
 
-const shoeButton = document.querySelector('.shoe-button'); //setting as constant
-const blackBelow = document.querySelector('.black-below'); //setting as constant
-const carouselContainer = document.querySelector('.carousel-container'); //setting as constant
+disableScroll();
 
-shoeButton.addEventListener('click', () => { // Once the click event happens on the shoeButton
-  blackBelow.style.display = 'flex'; // the black below screen becomes visible by display flex
-  carouselContainer.style.display = 'block'; // the image carousel comes alive as display block
-});
+function createRobotTimeline() {
 
-blackBelow.addEventListener('click', () => { // Once the user clicks on the blackBellow
-  blackBelow.style.display = 'none'; // The black below disappears
-  carouselContainer.style.display = 'none'; // Image carousel disappears
-});
+    let scrollEnd = "+=1900";
 
-// The rest of your page scroll/navigation code remains the same
-const pages = [
-  document.querySelector('.Intro-content'),
-  document.querySelector('.page-two'),
-  document.querySelector('#page-three'),
-  document.querySelector('#page-four'),
-  document.querySelector('#page-five')
-]; // this sets all the content pages into arrays which we can easily loop around
-
-let currentIndex = 0; //sets the 1st page index value as 0
-
-function scrollToPage(index) { // Sets a condition for function for scrolltopage
-  if (index >= 0 && index < pages.length) { // If function. this basically sets some conditions before any action begins. index >=0 means to sure the number isn’t negative. index < pages.length ensures it is less than the total number of pages
-    pages[index].scrollIntoView({ behavior: 'smooth' }); // If the above conditions are met, only then run this code. scrollIntoView brings scroll element into view. behaviour-smooth ensures realistic scroll behaviour
-    currentIndex = index; // Updates index with new page
-    updateButtonState(); // changes the behaviour of back and next button
-  }
-}
-
-function updateButtonState() { // Making backward forward buttons functionable
-  const backButton = document.querySelector('.backward-button'); // Setting it as const
-  const forwardButton = document.querySelector('.forward-button'); // Setting it as const
-
-  backButton.disabled = currentIndex === 0; // When the current index is 0 (meaning we are at the landing page), the backward button is disabled
-  forwardButton.disabled = currentIndex === pages.length - 1; //Same here
-}
-
-document.querySelector('.forward-button').addEventListener('click', () => { // Adding events to navigation button forward
-  if (currentIndex < pages.length - 1) { // If function here. it says that run the code only when this condition is met- Check if you’re not on the last page yet.
-    scrollToPage(currentIndex + 1); // Moves to the next page smoothly.
-  }
-});
-
-document.querySelector('.backward-button').addEventListener('click', () => { // Adding for navigation button backward
-  if (currentIndex > 0) { // If current index is not 0. Means it only works if you're not on first page
-    scrollToPage(currentIndex - 1); // Scroll one page back (-1) when clicked
-  }
-});
-
-window.addEventListener('scroll', () => { // An event listener for scroll
-  pages.forEach((page, index) => { // goes through each page in pages array
-    const rect = page.getBoundingClientRect(); // Realise the page’s position on the screen
-    if (rect.top >= 0 && rect.top < window.innerHeight / 2) { // If the top of that page is somewhere in the top half of the screen, that means this is the page currently being viewed.
-      currentIndex = index; 
-      updateButtonState(); // Updates the current page number
+    /*for 4K */
+    if (window.innerWidth >= 1440) {
+        scrollEnd = "+=3000";
     }
-  });
-});
 
-updateButtonState(); // Runs once at the start to make sure the buttons are correctly set when the page first loads.
+    let tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: "body",
+            start: "top top",
+            end: scrollEnd,
+            scrub: 2,
+            pin: ".robot-head"
+        }
+    });
+
+    // Robot and text animations
+    tl.to(".robot-front", {
+        x: moveFront,
+        y: 45,
+        duration: 2
+    });
+
+    tl.to(".robot-back", {
+        x: moveBack,
+        y: -280,
+        duration: 2
+    }, "<");
+
+    tl.to(".robot-head", {
+        x: moveHead,
+        duration: 1
+    }, "<");
+
+    tl.to(".text-ai", {
+        x: moveTextAI,
+        y: 145,
+        duration: 1
+    }, "<");
+
+    tl.to(".text-ml", {
+        opacity: 1,
+        duration: 1.2
+    }, "<");
+
+    // Brain flicker
+    tl.to(".robot-brain-f", { opacity: 1, duration: 0.1 }, "<0.2");
+    tl.to(".robot-brain-m", { opacity: 1, duration: 0.1 }, "<0.1");
+    tl.to(".robot-brain-b", { opacity: 1, duration: 0.1 }, "<0.1");
+    tl.to(".text-ml", { opacity: 1, duration: 0.3 }, "<");
+
+    // Brain movement
+    tl.to(".robot-brain-f", {
+        x: -50,
+        y: 20,
+        duration: 1
+    });
+
+    tl.to(".robot-brain-m", {
+        y: -20,
+        duration: 1
+    }, "<");
+
+    tl.to(".robot-brain-b", {
+        x: 80,
+        y: -30,
+        duration: 1
+    }, "<");
+
+    tl.to(".text-ml", { opacity: 1, duration: 1 }, "<");
+    tl.to(".text-ml", { opacity: 0, duration: 1 }, "<");
+
+    tl.to(".super", { opacity: 1, duration: 1 }, "<");
+    tl.to(".unsuper", { opacity: 1, duration: 1 }, "<");
+    tl.to(".reinforce", { opacity: 1, duration: 1 }, "<");
+
+    // Glow ray
+
+    tl.to(".glow-ray-m", {
+        height: 1000,
+        duration: 0.8
+    }, "<");
+
+    const musicSwitch = document.querySelector('.switch'); // Music toggle switch
+    const bgMusic = document.querySelector('.bgMusic'); // Background music audio element to trigger the audio
+
+    // The below code is generated by claude AI:-
+
+    // Note: Most browsers block autoplay until user interact so I had to make the default switch as OFF rather than ON
+
+    // Listen for switch changes
+    if (musicSwitch && bgMusic) {
+        musicSwitch.addEventListener('sl-change', (e) => {
+            if (e.target.checked) {
+            bgMusic.play();
+            } else {
+            bgMusic.pause();
+            }
+        });
+    }
+
+    const shoeButton = document.querySelector('.shoe-button');
+    const blackBelow = document.querySelector('.black-below');
+    const carouselContainer = document.querySelector('.carousel-container');
+    const carousel = document.querySelector('.carousel-thumbnails');
+    const thumbnails = document.querySelectorAll('.thumbnails__image');
+
+    shoeButton.addEventListener('click', () => {
+        blackBelow.classList.add('show');
+        carouselContainer.classList.add('show');
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (!carouselContainer.classList.contains('show')) return;
+
+        if (e.key === 'ArrowLeft') {
+            carousel.previous();
+        }
+
+        if (e.key === 'ArrowRight') {
+            carousel.next();
+        }
+
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            blackBelow.classList.remove('show');
+            carouselContainer.classList.remove('show');
+        }
+    });
+
+    blackBelow.addEventListener('click', () => {
+        blackBelow.classList.remove('show');
+        carouselContainer.classList.remove('show');
+    });
+
+    thumbnails.forEach((thumbnail, index) => {
+
+        thumbnail.addEventListener('click', () => {
+
+            carousel.goToSlide(index);
+
+        });
+
+    });
+
+    function updateActiveThumbnail(index) {
+
+        thumbnails.forEach((thumb) => {
+            thumb.classList.remove('active');
+        });
+
+        thumbnails[index].classList.add('active');
+
+    }
+
+    thumbnails.forEach((thumbnail, index) => {
+
+        thumbnail.addEventListener('click', () => {
+
+            carousel.goToSlide(index);
+
+            updateActiveThumbnail(index);
+
+        });
+    });
+
+    carousel.addEventListener('sl-slide-change', (event) => {
+
+        updateActiveThumbnail(event.detail.index);
+
+    });
+
+    // The rest of your page scroll/navigation code remains the same
+    const pages = [
+    document.querySelector('.Intro-content'),
+    document.querySelector('.page-two'),
+    document.querySelector('#page-three'),
+    document.querySelector('#page-four'),
+    document.querySelector('#page-five')
+    ]; // this sets all the content pages into arrays which we can easily loop around
+
+    let currentIndex = 0; //sets the 1st page index value as 0
+
+    function scrollToPage(index) { // Sets a condition for function for scrolltopage
+    if (index >= 0 && index < pages.length) { // If function. this basically sets some conditions before any action begins. index >=0 means to sure the number isn’t negative. index < pages.length ensures it is less than the total number of pages
+        pages[index].scrollIntoView({ behavior: 'smooth' }); // If the above conditions are met, only then run this code. scrollIntoView brings scroll element into view. behaviour-smooth ensures realistic scroll behaviour
+        currentIndex = index; // Updates index with new page
+        updateButtonState(); // changes the behaviour of back and next button
+    }
+    }
+
+    function updateButtonState() { // Making backward forward buttons functionable
+    const backButton = document.querySelector('.backward-button'); // Setting it as const
+    const forwardButton = document.querySelector('.forward-button'); // Setting it as const
+
+    backButton.disabled = currentIndex === 0; // When the current index is 0 (meaning we are at the landing page), the backward button is disabled
+    forwardButton.disabled = currentIndex === pages.length - 1; //Same here
+    }
+
+    document.querySelector('.forward-button').addEventListener('click', () => { // Adding events to navigation button forward
+    if (currentIndex < pages.length - 1) { // If function here. it says that run the code only when this condition is met- Check if you’re not on the last page yet.
+        scrollToPage(currentIndex + 1); // Moves to the next page smoothly.
+    }
+    });
+
+    document.querySelector('.backward-button').addEventListener('click', () => { // Adding for navigation button backward
+    if (currentIndex > 0) { // If current index is not 0. Means it only works if you're not on first page
+        scrollToPage(currentIndex - 1); // Scroll one page back (-1) when clicked
+    }
+    });
+
+    window.addEventListener('scroll', () => { // An event listener for scroll
+    pages.forEach((page, index) => { // goes through each page in pages array
+        const rect = page.getBoundingClientRect(); // Realise the page’s position on the screen
+        if (rect.top >= 0 && rect.top < window.innerHeight / 2) { // If the top of that page is somewhere in the top half of the screen, that means this is the page currently being viewed.
+        currentIndex = index; 
+        updateButtonState(); // Updates the current page number
+        }
+    });
+    });
+
+    updateButtonState(); // Runs once at the start to make sure the buttons are correctly set when the page first loads.
+}
+
