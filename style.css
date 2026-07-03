@@ -2,7 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    
+    //outline: 1px solid red;
 }
 
 html, body {
@@ -86,6 +86,8 @@ article {
     }
 }
 
+/*Page Two*/
+
 .what-ml {
     background-color: rgba(255,255,255, 0.03);
     backdrop-filter: blur(5px);
@@ -123,6 +125,7 @@ article {
     transform: translateY(-20px);
 }
 
+/*Overlay*/
 .overlay {
     pointer-events: none;
     position: fixed;
@@ -136,6 +139,7 @@ article {
     z-index: 15;
 }
 
+/*Playbuttons*/
 .play-buttons {
     position: fixed;
 
@@ -341,6 +345,8 @@ article {
     height: 0; /* initial height */
 }
 
+/*Page Three*/
+
 #page-three {
     margin-top: clamp(6rem, 10vw, 10rem);
 }
@@ -386,15 +392,14 @@ article {
     justify-content: center;
     align-items: center;
 
-    background: rgba(255,255,255,0.03);
-    backdrop-filter: blur(8px);
-
-    border: 1px solid rgba(255,255,255,0.15);
+    background: #ffffff;
 }
 
 .genai {
     cursor: pointer;
     margin: 0;
+
+    color: black;
 
     font-size: clamp(3rem, 3vw, 7rem);
 
@@ -639,15 +644,25 @@ article {
     }
 }
 
-/*4K*/
-@media (max-width: 2561px) {
-
-}
-
 /*Laptop*/
 @media (max-width: 1024px) {
     .purpose {
         margin-top: 50vh;
+    }
+    #page-four {
+        margin-left: 0;
+    }
+    .what-ml {
+        width: 35%;
+        padding: 1rem;
+    }
+
+    .what-ml article {
+        font-size: 1rem;
+    }
+
+    .what-ml h2 {
+        font-size: 2rem;
     }
 }
 
@@ -657,7 +672,6 @@ article {
     #page-four {
         flex-direction: column;
         text-align: center;
-        margin-left: 0;
         margin-top: 131.5%;
     }
 
@@ -700,7 +714,7 @@ article {
 
         align-items: start;
 
-        margin-top: 103%;
+        margin-top: 82%;
         padding: 0 1rem;
     }
 
@@ -736,7 +750,7 @@ article {
     }
 
     .text-ml {
-        font-size: clamp(0.8rem, 2vw, 1rem);
+        font-size: clamp(1rem, 2vw, 3rem);
         top: 40%;
         right: 18%;
     }
@@ -756,5 +770,19 @@ article {
     .text-ai {
         font-size: 1.2rem;
         right: 42%;
+    }
+    .robot-brain-f {
+        right: 9%;
+        top: 34%;
+    }
+
+    .robot-brain-m {
+        right: 9%;
+        top: 34%;
+    }
+
+    .robot-brain-b {
+        right: 11%;
+        top: 34%;
     }
 }

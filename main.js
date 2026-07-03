@@ -1,12 +1,5 @@
 gsap.registerPlugin(ScrollTrigger) //Gsap scroll trigger plugin
 
-const vw = window.innerWidth;
-
-const moveFront = -vw * 0.71;
-const moveBack = vw * 0.52;
-const moveHead = -vw * 0.27;
-const moveTextAI = -vw * 0.71;
-
 function disableScroll() {
 
     document.body.style.overflow = "hidden";
@@ -68,14 +61,62 @@ gsap.from(".robot-head", {
 
 disableScroll();
 
+let vw = window.innerWidth;
+
+let moveFront = -vw * 0.71;
+let moveBack = vw * 0.52;
+let moveHead = -vw * 0.27;
+let moveTextAI = -vw * 0.71;
+
+let frontY = 95;
+let backY = -600;
+
+let brainFrontX = -50;
+let brainFrontY = 20;
+
+let brainMidY = -20;
+
+let brainBackX = 80;
+let brainBackY = -30;
+
+let glowRay = 1000;
+let rayTime = 0.8;
+
 function createRobotTimeline() {
 
     let scrollEnd = "+=1900";
 
     /*for 4K */
-    if (window.innerWidth >= 1440) {
+    if (window.innerWidth >= 1614) {
         scrollEnd = "+=3000";
-    }
+
+        moveBack = vw * 0.68;
+
+        frontY = 130;
+        backY = -950;
+
+        brainFrontX = -80;
+        brainBackX = 120;
+
+        glowRay = 2360;
+        rayTime = 1.6;
+    };
+
+    /*for 4K */
+    if (window.innerWidth >= 1614) {
+        scrollEnd = "+=3000";
+
+        moveBack = vw * 0.68;
+
+        frontY = 130;
+        backY = -950;
+
+        brainFrontX = -80;
+        brainBackX = 120;
+
+        glowRay = 2360;
+        rayTime = 1.6;
+    };
 
     let tl = gsap.timeline({
         scrollTrigger: {
@@ -90,13 +131,13 @@ function createRobotTimeline() {
     // Robot and text animations
     tl.to(".robot-front", {
         x: moveFront,
-        y: 45,
+        y: frontY,
         duration: 2
     });
 
     tl.to(".robot-back", {
         x: moveBack,
-        y: -280,
+        y: backY,
         duration: 2
     }, "<");
 
@@ -124,19 +165,19 @@ function createRobotTimeline() {
 
     // Brain movement
     tl.to(".robot-brain-f", {
-        x: -50,
-        y: 20,
+        x: brainFrontX,
+        y: brainFrontY,
         duration: 1
     });
 
     tl.to(".robot-brain-m", {
-        y: -20,
+        y: brainMidY,
         duration: 1
     }, "<");
 
     tl.to(".robot-brain-b", {
-        x: 80,
-        y: -30,
+        x: brainBackX,
+        y: brainBackY,
         duration: 1
     }, "<");
 
@@ -150,8 +191,8 @@ function createRobotTimeline() {
     // Glow ray
 
     tl.to(".glow-ray-m", {
-        height: 1000,
-        duration: 0.8
+        height: glowRay,
+        duration: rayTime
     }, "<");
 
     const musicSwitch = document.querySelector('.switch'); // Music toggle switch
