@@ -84,9 +84,9 @@ let rayTime = 0.8;
 
 function createRobotTimeline() {
 
-    let scrollEnd = "+=1900";
+    let scrollEnd = "+=1600";
 
-    /*for 4K */
+    /*for desktop */
     if (window.innerWidth >= 1614) {
         scrollEnd = "+=3000";
 
@@ -97,25 +97,6 @@ function createRobotTimeline() {
 
         brainFrontX = -80;
         brainBackX = 120;
-
-        glowRay = 2360;
-        rayTime = 1.6;
-    };
-
-    /*for 4K */
-    if (window.innerWidth >= 1614) {
-        scrollEnd = "+=3000";
-
-        moveBack = vw * 0.68;
-
-        frontY = 130;
-        backY = -950;
-
-        brainFrontX = -80;
-        brainBackX = 120;
-
-        glowRay = 2360;
-        rayTime = 1.6;
     };
 
     let tl = gsap.timeline({
@@ -143,12 +124,6 @@ function createRobotTimeline() {
 
     tl.to(".robot-head", {
         x: moveHead,
-        duration: 1
-    }, "<");
-
-    tl.to(".text-ai", {
-        x: moveTextAI,
-        y: 145,
         duration: 1
     }, "<");
 
@@ -187,13 +162,6 @@ function createRobotTimeline() {
     tl.to(".super", { opacity: 1, duration: 1 }, "<");
     tl.to(".unsuper", { opacity: 1, duration: 1 }, "<");
     tl.to(".reinforce", { opacity: 1, duration: 1 }, "<");
-
-    // Glow ray
-
-    tl.to(".glow-ray-m", {
-        height: glowRay,
-        duration: rayTime
-    }, "<");
 
     const musicSwitch = document.querySelector('.switch'); // Music toggle switch
     const bgMusic = document.querySelector('.bgMusic'); // Background music audio element to trigger the audio
