@@ -620,8 +620,14 @@ article {
     }
 }
 
-/*Laptop*/
-@media (max-width: 1024px) {
+/*Ipad Pro*/
+@media (max-width: 1025px) {
+        .text-ml {
+        font-size: clamp(1rem, 2vw, 3rem);
+        top: 40%;
+        right: 18%;
+    }
+
     .purpose {
         margin-top: 50vh;
     }
@@ -640,26 +646,17 @@ article {
     .what-ml h2 {
         font-size: 2rem;
     }
-}
-
-/*Ipad Pro*/
-@media (max-width: 1025px) {
-        .text-ml {
-        font-size: clamp(1rem, 2vw, 3rem);
-        top: 40%;
-        right: 18%;
-    }
 
     .robot-front {
-        width: 60%;
+        width: 40%;
         right: 9%;
-        top: 38%;
+        top: 48%;
     }
 
     .robot-back {
-        width: 17%;
+        width: 13%;
         right: 9%;
-        top: 38%;
+        top: 45%;
     }
 
     .robot-brain-f {
@@ -794,15 +791,15 @@ article {
     }
 
     .robot-front {
-        width: 74%;
+        width: 47%;
         right: 9%;
-        top: 38%;
+        top: 45%;
     }
 
     .robot-back {
-        width: 27%;
+        width: 18%;
         right: 9%;
-        top: 37%;
+        top: 43%;
     }
 
     .robot-brain-f {
@@ -842,5 +839,55 @@ article {
         cursor: pointer;
         padding: 30px;
         transition: transform .4s ease-in-out;
+    }
+}
+
+/* For Mobile */
+@media (max-width: 450px) {
+    .robot-front {
+        width: 60%;
+        right: 9%;
+        top: 32%;
+    }
+
+    .robot-back {
+        width: 20%;
+        right: 9%;
+        top: 30%;
+    }
+
+    .robot-brain-f {
+        right: 9%;
+        top: 24%;
+    }
+
+    .robot-brain-m {
+        right: 9%;
+        top: 24%;
+    }
+
+    .robot-brain-b {
+        right: 11%;
+        top: 24%;
+    }
+
+    .text-ml {
+        top: 30%;
+        right: 13%;
+    }
+
+    .super {
+        top: 29%;
+        right: 25%;
+    }
+
+    .unsuper {
+        top: 22.5%;
+        right: 2.3%;
+    }
+
+    .reinforce {
+        top: 18%;
+        right: -21%;
     }
 }

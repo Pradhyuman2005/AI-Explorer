@@ -82,6 +82,7 @@ let glowRay = 1000;
 let rayTime = 0.8;
 
 function createRobotTimeline() {
+    console.log(window.innerWidth);
 
     let scrollEnd = "+=1600";
 
@@ -96,6 +97,25 @@ function createRobotTimeline() {
 
         brainFrontX = -80;
         brainBackX = 120;
+    } else if (window.innerWidth <= 457) { //Mobile
+        console.log("Mobile detected")
+
+        scrollEnd = "+=1400";
+
+        moveFront = -vw * 0.59;
+        moveBack = vw * 0.35;
+        moveHead = -vw * 0.12;
+
+        frontY = 40;
+        backY = -220;
+
+        brainFrontX = -35;
+        brainFrontY = 20;
+
+        brainMidY = -20;
+
+        brainBackX = 40;
+        brainBackY = -30;
     }
     
     let tl = gsap.timeline({
