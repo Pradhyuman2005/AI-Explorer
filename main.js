@@ -75,7 +75,6 @@ let brainFrontX = -50;
 let brainFrontY = 20;
 
 let brainMidY = -20;
-
 let brainBackX = 80;
 let brainBackY = -30;
 
@@ -97,8 +96,8 @@ function createRobotTimeline() {
 
         brainFrontX = -80;
         brainBackX = 120;
-    };
-
+    }
+    
     let tl = gsap.timeline({
         scrollTrigger: {
             trigger: "body",

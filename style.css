@@ -386,7 +386,7 @@ article {
 /* PAGE FIVE */
 
 #page-five {
-    min-height: 100vh;
+    min-height: auto;
 
     display: flex;
     flex-direction: column;
@@ -704,7 +704,7 @@ article {
     }
 }
 
-/* Tablet
+/*Tablet*/
 @media (max-width: 768px) {
 
     #page-four {
@@ -843,4 +843,4 @@ article {
         padding: 30px;
         transition: transform .4s ease-in-out;
     }
-} */
+}
