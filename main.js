@@ -97,9 +97,7 @@ function createRobotTimeline() {
 
         brainFrontX = -80;
         brainBackX = 120;
-    } else if (window.innerWidth <= 457) { //Mobile
-        console.log("Mobile detected")
-
+    } else if (window.innerWidth <= 557) { //Mobile
         scrollEnd = "+=1400";
 
         moveFront = -vw * 0.59;
